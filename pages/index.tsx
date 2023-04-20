@@ -2,8 +2,8 @@ import type { NextPage } from 'next';
 import styles from '../styles/Home.module.css';
 
 import { walletFunctionNames } from '../utils/walletFunctionNames';
-import { Button, Col, Modal, Row } from 'antd';
-import { useState } from 'react';
+import { Button, Col, Modal, Row, message } from 'antd';
+import { useEffect, useState } from 'react';
 import { ConnectButton, useConnectModal } from '@rainbow-me/rainbowkit';
 import EthConnect from '../components/Eth';
 import MisesWallet from '../components/MisesWallet';
@@ -17,37 +17,23 @@ const Home: NextPage = () => {
     result: any
   }[]>([]);
 
+  const [init, setinit] = useState(false)
 
-  const suiRequestFun = async (label: string, item: any) => {
-    const walletProvider = (window as any).martian.sui
-    try {
-      let params = item.params
-      const res = await walletProvider?.[item.method]?.bind(walletProvider)(...params)
-      callList.push({
-        method: item.method,
-        result: JSON.stringify(res)
-      })
-      setcallList([...callList])
-    } catch (err: any) {
-      callList.push({
-        method: item.method,
-        result: JSON.stringify(err?.message || err)
-      })
-      setcallList([...callList])
-      console.log(err)
+  useEffect(() => {
+    setinit(true)
+  }, [])
+  
+  useEffect(() => {
+    if(!init) {
+      return 
     }
-  }
-
-
-
-  const connectFunction = (label: string, item: any) => {
-    switch (label) {
-      case 'sui':
-        suiRequestFun(label, item)
-        break;
-        break;
+    if(callList.length ===0) {
+      message.info('清除成功')
+    }else{
+      message.success('调用成功')
     }
-  }
+  }, [callList.length])
+  
   return (
     <div className={styles.container}>
       <main className={styles.main}>
