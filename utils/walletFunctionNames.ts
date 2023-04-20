@@ -2,23 +2,26 @@ const ethFunctionName = ['eth_accounts', 'eth_coinbase', 'net_version', 'eth_cha
 
 const aptosFunctionName = ['getLedgerInfo', 'getChainId', 'connect', 'getAccount', 'getAccountResources', 'getAccountTransactions', 'getTransactions', 'getNetworks', 'getTransaction', 'changeNetwork', 'addNetwork', 'createToken', 'createCollection', 'createCollection', 'generateSignAndSubmitTransaction', 'signGenericTransaction', 'generateTransaction', 'signAndSubmitTransaction', 'signTransaction', 'submitTransaction', 'signMessage'] as const
 
-const suiFunctionName = ['getAccounts', 'signAndExecuteTransactionBlock'] as const
+const suiFunctionName = ['signAndExecuteTransactionBlock', 'verifySignedMessage', 'balance'] as const
+
+const misesFunctionName = ['isUnlocked', 'enable', 'misesAccount', 'hasWalletAccount', 'openWallet', 'disconnect', 'connect', 'userFollow', 'userUnFollow', 'setUserInfo', 'staking', 'signAmino'] as const
 
 export type ethEnum = typeof ethFunctionName
 export type aptosEnum = typeof aptosFunctionName
-export type suisEnum = typeof suiFunctionName
+export type suiEnum = typeof suiFunctionName
+export type misesEnum = typeof misesFunctionName
 export interface request {
-  method: ethEnum[number] | aptosEnum[number] | suisEnum[number],
-  params: any[] | ((account: string)=>any[]),
+  method: ethEnum[number] | aptosEnum[number] | suiEnum[number] | misesEnum[number],
+  params: any[] | ((account: string) => any[]),
   type?: 'account'
 }
 export interface walletFunctionName {
   label: string,
-  type: 'eth' | 'sui' | 'aptos',
+  type: 'eth' | 'sui' | 'aptos' | 'mises',
   list: request[]
 }
 export const walletFunctionNames: walletFunctionName[] = [{
-  label: 'ETH Wallet',
+  label: 'ETH',
   type: 'eth',
   list: [{
     method: 'wallet_addEthereumChain',
@@ -46,7 +49,7 @@ export const walletFunctionNames: walletFunctionName[] = [{
     params: []
   }, {
     method: 'eth_signTypedData_v4',
-    params: (account: string)=>{
+    params: (account: string) => {
       const typedData = JSON.stringify({
         domain: {
           chainId: '0x5',
@@ -54,7 +57,7 @@ export const walletFunctionNames: walletFunctionName[] = [{
           verifyingContract: "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC",
           version: "1",
         },
-    
+
         message: {
           prompt: "Welcome! In order to authenticate to this website, sign this request and your public address will be sent to the server in a verifiable way.",
           createdAt: `${Date.now()}`,
@@ -105,33 +108,80 @@ export const walletFunctionNames: walletFunctionName[] = [{
     params: []
   }, {
     method: 'getAccount',
-    params: (account: string) => {
-      return [account]
-    },
+    params: (account: string) => [account],
     type: 'account'
   }, {
     method: 'getAccountResources',
-    params: (account: string) => {
-      return [account]
-    },
+    params: (account: string) => [account],
     type: 'account'
   }, {
     method: 'getAccountTransactions',
-    params: (account: string) => {
-      return [account]
-    },
+    params: (account: string) => [account],
     type: 'account'
   }, {
     method: 'getTransactions',
     type: 'account',
-    params: (account: string) => {
-      return [account]
-    }
+    params: (account: string) => [account],
   }, {
     method: 'changeNetwork',
     params: ["https://fullnode.mainnet.aptoslabs.com"]
   }, {
     method: 'addNetwork',
     params: ["https://fullnode.mainnet.aptoslabs.com", 'dummy']
+  }]
+}, {
+  label: 'Mises',
+  type: 'mises',
+  list: [{
+    method: 'isUnlocked',
+    params: []
+  }, {
+    method: 'enable',
+    params: ['mainnet']
+  }, {
+    method: 'misesAccount',
+    params: []
+  }, {
+    method: 'openWallet',
+    params: []
+  }, {
+    method: 'hasWalletAccount',
+    params: []
+  }, {
+    method: 'setUserInfo',
+    params: [{
+      avatarUrl: "https://cdn.mises.site/s3://mises-storage/upload/2022/12/01/1669910304739108.png?sign=jsajeFsfq3xNP5WoVppHw0FrQ_ZeeMaxl3KIHH7cO0k&version=2.0",
+      emails: ['323111@qq.com'],
+      gender: "other",
+      homePageUrl: "",
+      intro: "21323131\n",
+      name: "Kikikiki",
+      telephones: ['21335913'],
+    }]
+  }, {
+    method: 'userFollow',
+    params: ["did:mises:mises17242kxp235mxjf02a87l6q4yx2xjz7qgec2hxm"]
+  }, {
+    method: 'userUnFollow',
+    params: ["did:mises:mises17242kxp235mxjf02a87l6q4yx2xjz7qgec2hxm"]
+  }, {
+    method: 'signAmino',
+    params: []
+  }, {
+    method: 'staking',
+    params: []
+  }]
+}, {
+  label: 'Sui',
+  type: 'sui',
+  list: [{
+    method: 'signAndExecuteTransactionBlock',
+    params: []
+  }, {
+    method: 'verifySignedMessage',
+    params: []
+  }, {
+    method: 'balance',
+    params: []
   }]
 }]

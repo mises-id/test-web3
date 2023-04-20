@@ -14,3 +14,19 @@ a {
 * {
   box-sizing: border-box;
 }
+.ant-card + .ant-card{
+  margin-bottom: 10px;
+}
+
+.wkit-connected-container, .wkit-button{
+  width: 100% !important;
+  line-height:10px !important
+}
+.wkit-connected-button, .wkit-button{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.wkit-disconnect-button__container{
+  z-index: 22;
+}
