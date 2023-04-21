@@ -9,6 +9,7 @@ import EthConnect from '../components/Eth';
 import MisesWallet from '../components/MisesWallet';
 import AptosWallet from '../components/Aptos';
 import SuiConnect from '../components/Sui';
+import KeplrWallet from '../components/Keplr';
 // import { alchemyProvider } from 'wagmi/providers/alchemy';
 const Home: NextPage = () => {
   // const [ethAccount, setaccount] = useState('')
@@ -63,6 +64,11 @@ const Home: NextPage = () => {
             if (val.type === 'sui') {
               return <div key={index} className={styles.walletContainer}>
                 <SuiConnect {...props} />
+              </div>
+            }
+            if (val.type === 'keplr') {
+              return <div key={index} className={styles.walletContainer}>
+                <KeplrWallet {...props} />
               </div>
             }
           })

@@ -6,18 +6,17 @@ const suiFunctionName = ['signAndExecuteTransactionBlock', 'verifySignedMessage'
 
 const misesFunctionName = ['isUnlocked', 'enable', 'misesAccount', 'hasWalletAccount', 'openWallet', 'disconnect', 'userFollow', 'userUnFollow', 'setUserInfo', 'staking', 'signAmino'] as const
 
-export type ethEnum = typeof ethFunctionName
-export type aptosEnum = typeof aptosFunctionName
-export type suiEnum = typeof suiFunctionName
-export type misesEnum = typeof misesFunctionName
+const keplrFunctionName = ['getKey', 'getOfflineSigner', 'getAccounts', 'signAmino', 'signDirect', 'sendTx', 'signArbitrary', 'verifyArbitrary', 'signEthereum', 'experimentalSuggestChain'] as const
+
+export type enumArr = typeof ethFunctionName | typeof aptosFunctionName | typeof suiFunctionName | typeof misesFunctionName | typeof keplrFunctionName
 export interface request {
-  method: ethEnum[number] | aptosEnum[number] | suiEnum[number] | misesEnum[number],
+  method: enumArr[number],
   params: any[] | ((account: string) => any[]),
   type?: 'account'
 }
 export interface walletFunctionName {
   label: string,
-  type: 'eth' | 'sui' | 'aptos' | 'mises',
+  type: 'eth' | 'sui' | 'aptos' | 'mises' | 'keplr',
   list: request[]
 }
 export const walletFunctionNames: walletFunctionName[] = [{
@@ -186,5 +185,67 @@ export const walletFunctionNames: walletFunctionName[] = [{
   }, {
     method: 'balance',
     params: []
+  }]
+}, {
+  label: 'Keplr',
+  type: 'keplr',
+  list: [{
+    method: 'getKey',
+    params: ['cosmoshub-4']
+  }, {
+    method: 'enable',
+    params: ['cosmoshub-4']
+  }, {
+    method: 'getOfflineSigner',
+    params: []
+  }, {
+    method: 'signEthereum',
+    params: []
+  }, {
+    method: 'experimentalSuggestChain',
+    params: [{
+      chainId: "mychain-1",
+      chainName: "my new chain",
+      rpc: "http://123.456.789.012:26657",
+      rest: "http://123.456.789.012:1317",
+      bip44: {
+        coinType: 118,
+      },
+      bech32Config: {
+        bech32PrefixAccAddr: "cosmos",
+        bech32PrefixAccPub: "cosmos" + "pub",
+        bech32PrefixValAddr: "cosmos" + "valoper",
+        bech32PrefixValPub: "cosmos" + "valoperpub",
+        bech32PrefixConsAddr: "cosmos" + "valcons",
+        bech32PrefixConsPub: "cosmos" + "valconspub",
+      },
+      currencies: [
+        {
+          coinDenom: "ATOM",
+          coinMinimalDenom: "uatom",
+          coinDecimals: 6,
+          coinGeckoId: "cosmos",
+        },
+      ],
+      feeCurrencies: [
+        {
+          coinDenom: "ATOM",
+          coinMinimalDenom: "uatom",
+          coinDecimals: 6,
+          coinGeckoId: "cosmos",
+          gasPriceStep: {
+            low: 0.01,
+            average: 0.025,
+            high: 0.04,
+          },
+        },
+      ],
+      stakeCurrency: {
+        coinDenom: "ATOM",
+        coinMinimalDenom: "uatom",
+        coinDecimals: 6,
+        coinGeckoId: "cosmos",
+      },
+    }]
   }]
 }]
