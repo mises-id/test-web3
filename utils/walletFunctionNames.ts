@@ -4,7 +4,7 @@ const aptosFunctionName = ['getLedgerInfo', 'getChainId', 'connect', 'getAccount
 
 const suiFunctionName = ['signAndExecuteTransactionBlock', 'verifySignedMessage', 'balance'] as const
 
-const misesFunctionName = ['isUnlocked', 'enable', 'misesAccount', 'hasWalletAccount', 'openWallet', 'disconnect', 'connect', 'userFollow', 'userUnFollow', 'setUserInfo', 'staking', 'signAmino'] as const
+const misesFunctionName = ['isUnlocked', 'enable', 'misesAccount', 'hasWalletAccount', 'openWallet', 'disconnect', 'userFollow', 'userUnFollow', 'setUserInfo', 'staking', 'signAmino'] as const
 
 export type ethEnum = typeof ethFunctionName
 export type aptosEnum = typeof aptosFunctionName
@@ -128,6 +128,9 @@ export const walletFunctionNames: walletFunctionName[] = [{
   }, {
     method: 'addNetwork',
     params: ["https://fullnode.mainnet.aptoslabs.com", 'dummy']
+  }, {
+    method: 'connect',
+    params: []
   }]
 }, {
   label: 'Mises',

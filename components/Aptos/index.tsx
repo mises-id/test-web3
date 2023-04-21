@@ -47,13 +47,12 @@ const AptosWallet = (props: walletProps) => {
       setaccount('')
       return
     }
-    const { authentication_key } = {} = await requestFun({
-      method: 'getAccount',
-      params: (account: string) => [account],
-      type: 'account'
+    const res  = await requestFun({
+      method: 'connect',
+      params: []
     })
-    if(authentication_key){
-      setaccount(authentication_key)
+    if(res.address){
+      setaccount(res.address)
     }
   }
   return (
