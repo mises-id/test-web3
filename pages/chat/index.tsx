@@ -6,6 +6,7 @@ const Chat = () => {
   return (
     <>
       <Script src="/js/sdnChatWidget.js" async></Script>
+      {/* @ts-ignore */}
       <chat-component baseUrl="https://portal0101.sending.network" widgetWidth="100vw" widgetHeight="100vh"/>
     </>
   )
