@@ -4,7 +4,7 @@ const aptosFunctionName = ['getLedgerInfo', 'getChainId', 'connect', 'getAccount
 
 const suiFunctionName = ['signAndExecuteTransactionBlock', 'verifySignedMessage', 'balance'] as const
 
-const misesFunctionName = ['isUnlocked', 'enable', 'misesAccount', 'hasWalletAccount', 'openWallet', 'disconnect', 'userFollow', 'userUnFollow', 'setUserInfo', 'staking', 'signAmino'] as const
+const misesFunctionName = ['isUnlocked', 'enable', 'misesAccount', 'hasWalletAccount', 'openWallet', 'disconnect', 'userFollow', 'userUnFollow', 'setUserInfo', 'staking', 'signAmino', 'signArbitrary'] as const
 
 const keplrFunctionName = ['getKey', 'getOfflineSigner', 'getAccounts', 'signAmino', 'signDirect', 'sendTx', 'signArbitrary', 'verifyArbitrary', 'signEthereum', 'experimentalSuggestChain'] as const
 
@@ -168,10 +168,13 @@ export const walletFunctionNames: walletFunctionName[] = [{
     params: ["did:mises:mises17242kxp235mxjf02a87l6q4yx2xjz7qgec2hxm"]
   }, {
     method: 'signAmino',
-    params: []
+    params: ['mainnet', 'mises1q3tp8u6rw8qh5ge5rvskf2esawnrwhaet4eknh', {"chain_id":"mainnet","account_number":"22","sequence":"1036","fee":{"gas":"260046","amount":[{"denom":"umis","amount":"27"}]},"msgs":[{"type":"cosmos-sdk/MsgUndelegate","value":{"delegator_address":"mises1q3tp8u6rw8qh5ge5rvskf2esawnrwhaet4eknh","validator_address":"misesvaloper1jr7w3n9y2xnmsg22lxmjypgff055mawa497773","amount":{"denom":"umis","amount":"1115"}}}],"memo":""}]
   }, {
     method: 'staking',
-    params: []
+    params: [{"msgs":[{"typeUrl":"/cosmos.staking.v1beta1.MsgUndelegate","value":{"amount":{"amount":"1115","denom":"umis"},"delegatorAddress":"mises1q3tp8u6rw8qh5ge5rvskf2esawnrwhaet4eknh","validatorAddress":"misesvaloper1jr7w3n9y2xnmsg22lxmjypgff055mawa497773"}}],"gasLimit":260046,"gasFee":[{"amount":"27","denom":"umis"}]}]
+  }, {
+    method: 'signArbitrary',
+    params: ['mainnet', 'mises1q3tp8u6rw8qh5ge5rvskf2esawnrwhaet4eknh', 'sign content']
   }]
 }, {
   label: 'Sui',
