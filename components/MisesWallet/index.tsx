@@ -11,6 +11,9 @@ const MisesWallet = (props: walletProps) => {
     try {
       let params = item.params
       console.log(walletProvider?.[item.method], item.method)
+      const paramsStr = JSON.stringify(params)
+      params = JSON.parse(paramsStr.replace(/misesAccount/g, account))
+      console.log(params)
       const res = await walletProvider?.[item.method]?.bind(walletProvider)(...params)
       callList.push({
         method: item.method,

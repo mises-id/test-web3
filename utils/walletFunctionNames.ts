@@ -168,13 +168,13 @@ export const walletFunctionNames: walletFunctionName[] = [{
     params: ["did:mises:mises17242kxp235mxjf02a87l6q4yx2xjz7qgec2hxm"]
   }, {
     method: 'signAmino',
-    params: ['mainnet', 'mises1q3tp8u6rw8qh5ge5rvskf2esawnrwhaet4eknh', {"chain_id":"mainnet","account_number":"22","sequence":"1036","fee":{"gas":"260046","amount":[{"denom":"umis","amount":"27"}]},"msgs":[{"type":"cosmos-sdk/MsgUndelegate","value":{"delegator_address":"mises1q3tp8u6rw8qh5ge5rvskf2esawnrwhaet4eknh","validator_address":"misesvaloper1jr7w3n9y2xnmsg22lxmjypgff055mawa497773","amount":{"denom":"umis","amount":"1115"}}}],"memo":""}]
+    params: ['mainnet', 'misesAccount', {"chain_id":"mainnet","account_number":"22","sequence":"1036","fee":{"gas":"260046","amount":[{"denom":"umis","amount":"27"}]},"msgs":[{"type":"cosmos-sdk/MsgUndelegate","value":{"delegator_address":"misesAccount","validator_address":"misesvaloper1jr7w3n9y2xnmsg22lxmjypgff055mawa497773","amount":{"denom":"umis","amount":"1115"}}}],"memo":""}]
   }, {
     method: 'staking',
-    params: [{"msgs":[{"typeUrl":"/cosmos.staking.v1beta1.MsgUndelegate","value":{"amount":{"amount":"1115","denom":"umis"},"delegatorAddress":"mises1q3tp8u6rw8qh5ge5rvskf2esawnrwhaet4eknh","validatorAddress":"misesvaloper1jr7w3n9y2xnmsg22lxmjypgff055mawa497773"}}],"gasLimit":260046,"gasFee":[{"amount":"27","denom":"umis"}]}]
+    params: [{"msgs":[{"typeUrl":"/cosmos.staking.v1beta1.MsgUndelegate","value":{"amount":{"amount":"1115","denom":"umis"},"delegatorAddress":"misesAccount","validatorAddress":"misesvaloper1jr7w3n9y2xnmsg22lxmjypgff055mawa497773"}}],"gasLimit":260046,"gasFee":[{"amount":"27","denom":"umis"}]}]
   }, {
     method: 'signArbitrary',
-    params: ['mainnet', 'mises1q3tp8u6rw8qh5ge5rvskf2esawnrwhaet4eknh', 'sign content']
+    params: ['mainnet', 'misesAccount', 'sign content']
   }]
 }, {
   label: 'Sui',
